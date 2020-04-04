@@ -1,0 +1,62 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define fastio   ios::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;
+
+
+ll a[60][60], n, k;
+ll test=1;
+bool row[60][60], col[60][60], sol;
+void solve(ll r, ll cl, ll m) {
+    if (r == n && cl == n + 1 && m == k && !sol) {
+        sol = true;
+        cout << "Case #" << test << ": " << "POSSIBLE\n";
+        for (ll i = 1; i <= n; ++i) {
+            for (ll j = 1; j <= n; ++j) {
+                cout << a[i][j] << " ";
+            }
+            cout << "\n";
+        }
+        return;
+    }
+    else if (r > n) {
+        return;
+    }
+    else if (cl > n) {
+        solve(r + 1, 1, m);
+    }
+    for (ll i = 1; i <= n && !sol; ++i) {
+        if (!row[r][i] && !col[cl][i]) {
+            row[r][i] = col[cl][i] = true;
+            if (r == cl) {
+                m += i;
+            }
+            a[r][cl] = i;
+
+            solve(r, cl + 1, m);
+
+            row[r][i] = col[cl][i] = false;
+            if (r == cl) {
+                m -= i;
+            }
+            a[r][cl] = 0;
+        }
+    }
+}
+
+int main() {
+    fastio
+    ll t;
+    cin>>t;
+
+    while(t--){
+      cin>>n>>k;
+      solve(1,1,0);
+      if(!sol){
+        cout<<"Case #"<<test<<": "<<"IMPOSSIBLE"<<endl;
+      }
+      sol=false;
+      test++;
+    }
+    return 0;
+}
