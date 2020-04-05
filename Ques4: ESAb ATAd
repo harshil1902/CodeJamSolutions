@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+#define ll long long
+#define fastio   ios::sync_with_stdio(false); cin.tie(0), cout.tie(0);
+using namespace std;
+int main() {
+    fastio
+    ll t,b;
+    cin>>t>>b;
+    while(t--){
+      char c;
+      char s[10];
+      ll r=10,i=0;
+    
+     
+      while(i<r){
+        cout<<(i+1)<<endl;
+        cout.flush();
+        cin>>c;
+        s[i]=c;
+        i++;
+      }
+      i=0;
+      while(i<r){
+        cout<<s[i];
+        i++;
+      }
+
+      cout<<endl;
+      cout.flush();
+      cin>>c;
+      if(c=='Y') continue;
+      else return 0;
+   
+    }
+    return 0;
+}
